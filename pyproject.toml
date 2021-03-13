@@ -30,7 +30,7 @@ Pygments = "^2.8.1"
 mypy = "^0.812"
 
 [tool.poetry.dev-dependencies]
-pytest = "^3.0"
+pytest = "^6.0"
 pytest-cov = "^2.4"
 
 [tool.poetry.scripts]
