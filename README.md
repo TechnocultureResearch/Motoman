@@ -5,3 +5,6 @@ A command line tool to control a set of stepper motors. Intended to serve the sp
 ## Requirements
 - Python 3.7 (or later)
 - toml
+
+# Usage
+- `mypy .`: to run static type checking
