@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "motoman"
+version = "0.1.0"
+description = "A command line tool to control a set of stepper motors"
+
+license = "MIT"
+
+authors = [
+    "Satyam Tiwary <satyamtiwary@vvbiotech.com>"
+]
+
+readme = 'README.md'
+
+repository = "https://github.com/TechnocultureResearch/MotorsManager-CLI"
+homepage = "www.technocultureresearch.org"
+
+keywords = ['instrumentation', 'control', 'motors', 'serial']
+
+[tool.poetry.dependencies]
+python = "^3.5"
+toml = "^0.9"
+
+# Dependencies with extras
+requests = { version = "^2.13", extras = [ "security" ] }
+# Python specific dependencies with prereleases allowed
+pathlib2 = { version = "^2.2", python = "~2.7", allow-prereleases = true }
+# Git dependencies
+cleo = { git = "https://github.com/sdispater/cleo.git", branch = "master" }
+
+# Optional dependencies (extras)
+pendulum = { version = "^1.4", optional = true }
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+pytest-cov = "^2.4"
+
+[tool.poetry.scripts]
+my-script = 'my_package:main'
