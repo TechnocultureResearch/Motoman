@@ -28,6 +28,7 @@ toml = "^0.9"
 prompt-toolkit = "^3.0.17"
 Pygments = "^2.8.1"
 mypy = "^0.812"
+python-nubia = "^0.2b5"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.0"
