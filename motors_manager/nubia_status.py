@@ -23,10 +23,9 @@ class NubiaExampleStatusBar(statusbar.StatusBar):
         else:
             is_verbose = (Token.Info, "OFF")
         return [
-            (Token.Toolbar, "Motoman!"),
+            (Token.Info, "Motoman v0.1"),
             spacer,
             (Token.Toolbar, "Verbose "),
-            spacer,
             is_verbose,
         ]
         

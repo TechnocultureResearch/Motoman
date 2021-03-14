@@ -1,104 +1,49 @@
 import asyncio
 import socket
-import typing
+from typing import Any
 from termcolor import cprint
 from nubia import command, argument, context
 
-from .devices.ports import get_ports
-
-
-@command(aliases=["list", "l"])
-def get_all_motors():
-    """
-    List all motors connected via serial to this computer.
-    """
-    for port in get_ports():
-        cprint(port.name, "cyan")
-
-
-@command(aliases=["lookup"])
-@argument("hosts", description="Hostnames to resolve", aliases=["i"])
-@argument("bad_name", name="nice", description="testing")
-def lookup_hosts(hosts: typing.List[str], bad_name: int):
-    """
-    This will lookup the hostnames and print the corresponding IP addresses
-    """
-    ctx = context.get_context()
-    cprint("Input: {}".format(hosts), "yellow")
-    cprint("Verbose? {}".format(ctx.verbose), "yellow")
-    for host in hosts:
-        cprint("{} is {}".format(host, socket.gethostbyname(host)))
-
-    # optional, by default it's 0
-    return 0
-
-
-@command("good-name")
-def bad_name():
-    """
-    This command has a bad function name, but we ask Nubia to register a nicer
-    name instead
-    """
-    cprint("Good Name!", "green")
-
+from .devices.ports import Ports
 
 @command
-@argument("number", type=int)
-async def triple(number):
-    "Calculates the triple of the input value"
-    cprint("Input is {}".format(number))
-    cprint("Type of input is {}".format(type(number)))
-    cprint("{} * 3 = {}".format(number, number * 3))
-    await asyncio.sleep(2)
+def motors():
+  """
+  Show all motors.
+  """
+  for i, port in enumerate(Ports.ports()):
+    cprint("Motor {}: {}".format(i, port), "cyan")
 
 
-@command("be-blocked")
-def be_blocked():
-    """
-    This command is an example of command that blocked in configerator.
-    """
+@command#(aliases=["m"])
+@argument("id", type=int, positional=True)
+def m(id: int):
+  """
+  Show a particular motor.
+  """
+  ctx = context.get_context()
 
-    cprint("If you see me, something is wrong, Bzzz", "red")
-
-
-@command
-@argument("style", description="Pick a style", choices=["test", "toast", "toad"])
-@argument("stuff", description="more colors", choices=["red", "green", "blue"])
-@argument("code", description="Color code", choices=[12, 13, 14])
-def pick(style: str, stuff: typing.List[str], code: int):
-    """
-    A style picking tool
-    """
-    cprint("Style is '{}' code is {}".format(style, code), "yellow")
+  p = Ports.ports()
+  try:
+    cprint("Motor {}: {}".format(id, p[id]), "green")
+  except IndexError as e:
+    cprint("Error: No active motor connections found.", "red")
+    if ctx.verbose:
+      cprint(" Exception Raised: {}".format(e), "yellow")
 
 
-# instead of replacing _ we rely on camelcase to - super-command
-
-
-@command
-class SuperCommand:
-    "This is a super command"
-
-    def __init__(self, shared: int = 0) -> None:
-        self._shared = shared
-
-    @property
-    def shared(self) -> int:
-        return self._shared
-
-    """This is the super command help"""
-
-    @command
-    @argument("firstname", positional=True)
-    def print_name(self, firstname: str):
-        """
-        print a name
-        """
-        cprint("My name is: {}".format(firstname))
-
-    @command(aliases=["do"])
-    def do_stuff(self, stuff: int):
-        """
-        doing stuff
-        """
-        cprint("stuff={}, shared={}".format(stuff, self.shared))
+@command(aliases=["p"])
+def protocol():
+  """
+  Print the numbers that the motors use for different commands.
+  """
+  cprint("=============================== DEBUG MODE ==============================", "yellow")
+  cprint("=========================================================================", "yellow")
+  cprint("Initial Mode: Move slider OUTWARDS [Code: 1]", "yellow")
+  cprint("Change Current Mode: by Sending the Corresponding Number.\n", "yellow")
+  cprint("\tMove Slider OUTWARDS ===> 1", "yellow")
+  cprint("\tMove Slider INWARDS  ===> 2", "yellow")
+  cprint("\tSTOP Slider          ===> 3", "yellow")
+  cprint("\tIDLE mode            ===> 4", "yellow")
+  cprint("\tSET MOTOR SPEED      ===> 5 to 70", "yellow")
+  cprint("=========================================================================", "yellow")
