@@ -6,7 +6,7 @@ license = "MIT"
 authors = ["Satyam Tiwary <satyamtiwary@vvbiotech.com>"]
 readme = 'README.md'
 repository = "https://github.com/TechnocultureResearch/MotorsManager-CLI"
-homepage = "www.technocultureresearch.org"
+homepage = "http://www.technocultureresearch.org"
 keywords = ['instrumentation', 'control', 'motors', 'serial']
 classifiers = [
     "Topic :: Software Development :: Embedded Systems",
