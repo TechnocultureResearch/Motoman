@@ -1,5 +1,3 @@
-import asyncio
-import socket
 from typing import Any
 from termcolor import cprint
 from nubia import command, argument, context
@@ -16,8 +14,10 @@ def motors():
 
 
 @command#(aliases=["m"])
-@argument("id", type=int, positional=True)
-def m(id: int):
+@argument("id", description="Motor number the command is to be sent to", type=int, positional=True)
+@argument("command", description="Command to be sent to the given motor", choices=range(1,71), type=int, positional=True)
+# TODO: Move the constants associated to the microcontroller protocol into the config file
+def m(id: int, command: int):
   """
   Show a particular motor.
   """
@@ -25,9 +25,11 @@ def m(id: int):
 
   p = Ports.ports()
   try:
-    cprint("Motor {}: {}".format(id, p[id]), "green")
+    if ctx.verbose:
+      cprint("Motor {}: {}".format(id, p[id]), "green")
+    Ports.dispatch_command(id, command)
   except IndexError as e:
-    cprint("Error: No active motor connections found.", "red")
+    cprint("Error: Motor connection not found.", "red")
     if ctx.verbose:
       cprint(" Exception Raised: {}".format(e), "yellow")
 
@@ -37,13 +39,19 @@ def protocol():
   """
   Print the numbers that the motors use for different commands.
   """
-  cprint("=============================== DEBUG MODE ==============================", "yellow")
-  cprint("=========================================================================", "yellow")
-  cprint("Initial Mode: Move slider OUTWARDS [Code: 1]", "yellow")
-  cprint("Change Current Mode: by Sending the Corresponding Number.\n", "yellow")
+  cprint("")
+  cprint("=============================== PROTOCOL ==============================")
+  cprint("=======================================================================")
+  cprint("Initial Mode: Move slider OUTWARDS [Code: 1]")
+  cprint("Change Current Mode: by Sending the Corresponding Number.\n")
   cprint("\tMove Slider OUTWARDS ===> 1", "yellow")
   cprint("\tMove Slider INWARDS  ===> 2", "yellow")
   cprint("\tSTOP Slider          ===> 3", "yellow")
   cprint("\tIDLE mode            ===> 4", "yellow")
   cprint("\tSET MOTOR SPEED      ===> 5 to 70", "yellow")
-  cprint("=========================================================================", "yellow")
+  cprint("=======================================================================")
+  cprint("")
+
+
+protocol()
+motors()
