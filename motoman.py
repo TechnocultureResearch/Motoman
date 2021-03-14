@@ -1,17 +1,7 @@
+from motors_manager import start_nubia
 
 def main():
-  # session = PromptSession(completer=moto_completer)
+    start_nubia()
 
-  while True:
-      try:
-          # text = session.prompt('> ')
-      except KeyboardInterrupt:
-          continue
-      except EOFError:
-          break
-      else:
-          print('You entered:', text)
-  print('GoodBye!')
-
-if __name__ == "__main__":
-  main()
+if __name__ == '__main__':
+    main()
