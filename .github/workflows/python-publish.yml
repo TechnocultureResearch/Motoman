@@ -5,8 +5,14 @@ name: TestPyPi
 # name: Upload Python Package on TestPyPi
 
 on:
+  push:
+    branches:
+      - main
   release:
-    types: [published, edited]
+    types:
+      - created
+      - published
+      - edited
 
 jobs:
   deploy:
