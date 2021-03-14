@@ -23,8 +23,8 @@ class Port:
   """
   id: int
   name: str
-  VID: int
-  PID: int = field(repr=False)
+  vid: int
+  pid: int = field(repr=False)
   device: str = field(repr=False)
   
   def __hash__(self):
@@ -32,20 +32,19 @@ class Port:
 
 
 is_uart: Callable[[Port], bool] = lambda port: 'tty' in port.name or 'usb' in port.name
-has_vid: Callable[[Port], bool] = lambda port: port.VID is not None
+has_vid: Callable[[Port], bool] = lambda port: port.vid is not None
 description_has_arduino: Callable[[Port], bool] = lambda port: 'arduino' in port.description or 'Arduino' in port.description
-# is_ftdi = lambda port: 0x0403 
-# is_arduino 
-
+criteria: Callable[[Port], bool] = lambda port: (is_uart(port) or description_has_arduino(port)) and has_vid(port)
 
 class Ports:
   _count: int = 0
   _ports: Set[Port] = set()
+  _connections: List[serial.Serial] = list()
 
   @staticmethod
   def fetch(
         getter: Callable[[], List[Any]] = list_ports.comports, 
-        predicate: Callable[[str], bool] = description_has_arduino,
+        predicate: Callable[[str], bool] = criteria,
         *,
         printer: Callable = cprint
       ) -> List[Port]:
@@ -64,18 +63,22 @@ class Ports:
       Ports._count += 1
       for _ in diff_port_1:
         Ports._ports.add(_)
+        new_connection = serial.Serial(port=_.device, baudrate=115200, timeout=.1)
+        Ports._ports.add(new_connection)
       printer("{} new device(s) attached.".format(len(diff_port_1)), "green")
     elif len(diff_port_2):
       Ports._count -= 1
       for _ in diff_port_2:
         Ports._ports.remove(_)
+        # Ports._connections[_].close()
+        # Ports._connections.remove(_)
       printer("{} device(s) removed.".format(len(diff_port_2)), "red")
 
 
   @staticmethod
   def ports(
         getter: Callable[[], List[Any]] = list_ports.comports, 
-        predicate: Callable[[str], bool] = description_has_arduino
+        predicate: Callable[[str], bool] = criteria
       ) -> List[Port]:
     """ 
     Prints each of the ports available with reasonable tty like names and vids.
@@ -86,6 +89,24 @@ class Ports:
     Ports.fetch()
     return list(Ports._ports)
 
+  @staticmethod
+  def print_command(id: int, port: Port, command: int, msg: str):
+    """
+    """
+
+    ctx = context.get_context()
+
+    command_name = ''
+    try:
+      command_name = commands[command]
+    except:
+      command_name = commands[-1]
+    
+    if ctx.verbose:
+      cprint("Motor {}: ({}|{}) - {}({}-{})".format(id, port.description, port.name, command_name, command, msg), "green")
+    else:
+      cprint("Motor {}: {}".format(id, command_name), "green")
+    
 
   @staticmethod
   def dispatch_command(id: int, command: int):
@@ -93,19 +114,25 @@ class Ports:
     """
 
     ctx = context.get_context()
+    
+    msg = bytes("3", 'utf-8')
 
     try:
-      p = list(Ports._ports)[id]
-      with serial.Serial(p.device, 115200, timeout=1) as s:
-        if ctx.verbose:
-          cprint("Motor {}: ({}|{}) - {}({}-{})".format(id, p.description, p.name, commands[command], command, bin(command)), "green")
-        else:
-          cprint("Motor {}: {}".format(id, commands[command]), "green")
-        s.write(command)
+      port = list(Ports._ports)[id]
     except IndexError as e:
-      print(e)
+      cprint(e, "red")
+      # with serial.Serial(p.device, 115200, timeout=1) as s:
+        # msg = command.to_bytes(8, 'little')
+    try:
+      s = Ports._connections[id]
+      s.write(msg)
+      s.flush()
+    except IndexError as e:
+      cprint("Error: Connection not found. {}".format(e), "red")
     except serial.SerialException as e:
-      print(e)
+      cprint(e, "red")
+    
+    Ports.print_command(id, port, command, msg)
 
 
 # Run fetch at import-time
