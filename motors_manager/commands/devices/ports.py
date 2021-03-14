@@ -1,3 +1,4 @@
+from os import close
 import serial
 from serial.tools import list_ports
 from typing import List, Set, Callable, Any
@@ -39,7 +40,7 @@ criteria: Callable[[Port], bool] = lambda port: (is_uart(port) or description_ha
 class Ports:
   _count: int = 0
   _ports: Set[Port] = set()
-  _connections: List[serial.Serial] = list()
+  _connections: Set[serial.Serial] = set()
 
   @staticmethod
   def fetch(
@@ -64,14 +65,20 @@ class Ports:
       for _ in diff_port_1:
         Ports._ports.add(_)
         new_connection = serial.Serial(port=_.device, baudrate=115200, timeout=.1)
-        Ports._ports.add(new_connection)
+        Ports._connections.add(new_connection)
       printer("{} new device(s) attached.".format(len(diff_port_1)), "green")
     elif len(diff_port_2):
       Ports._count -= 1
       for _ in diff_port_2:
+        # i = Ports._ports.index(_)
         Ports._ports.remove(_)
-        # Ports._connections[_].close()
-        # Ports._connections.remove(_)
+        # close_this = serial.Serial()
+        # close_this.port = _.device
+        # close_this.baudrate = 115200
+        # close_this.timeout = .1
+        # p = Ports._connections.remove(close_this)
+        # p.close()
+        # Ports._connections.remove()
       printer("{} device(s) removed.".format(len(diff_port_2)), "red")
 
 
@@ -115,7 +122,7 @@ class Ports:
 
     ctx = context.get_context()
     
-    msg = bytes("3", 'utf-8')
+    msg = str(command).encode('ascii')
 
     try:
       port = list(Ports._ports)[id]
@@ -124,15 +131,14 @@ class Ports:
       # with serial.Serial(p.device, 115200, timeout=1) as s:
         # msg = command.to_bytes(8, 'little')
     try:
-      s = Ports._connections[id]
+      s = list(Ports._connections)[id]
       s.write(msg)
-      s.flush()
+      # s.flush()
+      Ports.print_command(id, port, command, msg)
     except IndexError as e:
       cprint("Error: Connection not found. {}".format(e), "red")
     except serial.SerialException as e:
       cprint(e, "red")
-    
-    Ports.print_command(id, port, command, msg)
 
 
 # Run fetch at import-time
