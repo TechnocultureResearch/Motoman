@@ -32,8 +32,8 @@ jobs:
         poetry install
     - name: Build and publish
       env:
-        TWINE_USERNAME: ${{ secrets.TEST_PYPI_USERNAME }}
-        TWINE_PASSWORD: ${{ secrets.TEST_PYPI_PASSWORD }}
+        TEST_PYPI_USERNAME: ${{ secrets.TEST_PYPI_USERNAME }}
+        TEST_PYPI_PASSWORD: ${{ secrets.TEST_PYPI_PASSWORD }}
       run: |
         poetry config repositories.testpypi https://test.pypi.org/legacy/
-        poetry publish --build -r testpypi
+        poetry publish --build -r testpypi --username ${{ TEST_PYPI_USERNAME }} --password ${{ TEST_PYPI_PASSWORD }}
