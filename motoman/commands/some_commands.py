@@ -2,7 +2,7 @@ from typing import Any
 from termcolor import cprint
 from nubia import command, argument, context
 
-from .devices.ports import Ports
+from motoman.commands.devices.ports import Ports
 
 @command
 def motors():

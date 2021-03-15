@@ -1,4 +1,4 @@
-from motors_manager import start_nubia
+from motoman import start_nubia
 
 def main():
     start_nubia()

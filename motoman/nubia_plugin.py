@@ -1,6 +1,6 @@
 import argparse
-from .nubia_context import NubiaExampleContext
-from .nubia_status import NubiaExampleStatusBar
+from motoman.nubia_context import NubiaExampleContext
+from motoman.nubia_status import NubiaExampleStatusBar
 from nubia import PluginInterface, CompletionDataSource
 from nubia.internal.blackcmd import CommandBlacklist
 from pygments.token import Token
