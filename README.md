@@ -1,4 +1,7 @@
-# `motoman`: **Moto**rs **Man**ager CLI
+# motoman
+***Moto***rs ***Man***ager CLI
+
+
 [![Tests](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-package.yml/badge.svg?branch=dev)](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-package.yml)
 [![TestPyPi](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-publish.yml/badge.svg)](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-publish.yml)
 
