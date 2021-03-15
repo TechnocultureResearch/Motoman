@@ -36,7 +36,7 @@ jobs:
         poetry install --no-interaction
     - name: run application 
       run: |
-        poetry run python motoman
+        poetry run motoman
 #     - name: Test with pytest
 #       run: |
 #         pytest
