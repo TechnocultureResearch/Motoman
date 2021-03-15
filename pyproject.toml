@@ -20,6 +20,7 @@ prompt-toolkit = "^3.0.17"
 Pygments = "^2.8.1"
 python-nubia = "^0.2b5"
 pyserial = "^3.5"
+colorama = "^0.4.4"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.812"
