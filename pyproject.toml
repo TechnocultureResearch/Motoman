@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "motoman"
-version = "0.1.3"
+version = "0.1.4-alpha"
 description = "A command line tool to control a set of stepper motors"
 license = "GPL3"
 authors = ["Satyam Tiwary <satyamtiwary@vvbiotech.com>"]
