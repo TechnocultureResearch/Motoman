@@ -1,4 +1,7 @@
-# `motoman`: Motors Manager CLI
+# motoman
+***Moto***rs ***Man***ager CLI
+
+
 [![Tests](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-package.yml/badge.svg?branch=dev)](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-package.yml)
 [![TestPyPi](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-publish.yml/badge.svg)](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-publish.yml)
 
@@ -20,7 +23,7 @@ python motoman.py
 
 ## Using pip
 ```bash
-pip install -i https://test.pypi.org/simple/ motoman
+pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple motoman
 ```
 
 # More on Usage

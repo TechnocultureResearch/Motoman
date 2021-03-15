@@ -5,5 +5,5 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 
 """ Imports needed by tests """
-from motors_manager import *
-from motors_manager.commands.devices import ports
+from motoman import *
+from motoman.commands.devices import ports
