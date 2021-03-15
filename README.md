@@ -36,7 +36,3 @@ pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://
 ```bash
 motoman -v
 ```
-or
-```bash
-motoman --verbose
-```
