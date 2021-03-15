@@ -3,7 +3,6 @@
 
 
 [![Tests](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-package.yml/badge.svg?branch=dev)](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-package.yml)
-[![TestPyPi](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-publish.yml/badge.svg)](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-publish.yml)
 
 A command line tool to control a set of stepper motors. Intended to serve the specific needs of Microfabricator T.
 
