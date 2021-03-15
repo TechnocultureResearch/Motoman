@@ -5,6 +5,7 @@ from typing import List, Set, Callable, Any
 from dataclasses import dataclass, field
 from termcolor import colored, cprint
 from nubia import context
+# from enum import Enum
 
 
 commands = [
@@ -15,6 +16,20 @@ commands = [
   'Idle',
   'SetSpeed'
 ]
+
+
+# class port_errors(Enum):
+#   PortNotFound = 1
+#   PortBusy = 2
+#   PortNameInvalid = 3
+
+
+# def error(err: str):
+#   try:
+#     err_msg = port_errors[err]
+#     print(err_msg)
+#   except IndexError as e:
+#     print(e)
 
 
 @dataclass
@@ -36,6 +51,7 @@ is_uart: Callable[[Port], bool] = lambda port: 'tty' in port.name or 'usb' in po
 has_vid: Callable[[Port], bool] = lambda port: port.vid is not None
 description_has_arduino: Callable[[Port], bool] = lambda port: 'arduino' in port.description or 'Arduino' in port.description
 criteria: Callable[[Port], bool] = lambda port: (is_uart(port) or description_has_arduino(port)) and has_vid(port)
+
 
 class Ports:
   _count: int = 0
@@ -137,6 +153,7 @@ class Ports:
       Ports.print_command(id, port, command, msg)
     except IndexError as e:
       cprint("Error: Connection not found. {}".format(e), "red")
+      # error(port_errors.PortNotFound)
     except serial.SerialException as e:
       cprint(e, "red")
 
