@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "motoman"
-version = "0.1.1"
+version = "0.1.3"
 description = "A command line tool to control a set of stepper motors"
 license = "GPL3"
 authors = ["Satyam Tiwary <satyamtiwary@vvbiotech.com>"]
@@ -27,7 +27,7 @@ pytest = "^6.0"
 pytest-cov = "^2.4"
 
 [tool.poetry.scripts]
-motoman = 'motoman.motoman:main' # main function of motoman.py -> Entry point
+motoman = 'motoman.entry:main' # main function of motoman.py -> Entry point
 
 [build-system]
 requires = ["poetry>=0.12"]
