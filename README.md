@@ -4,6 +4,7 @@
 
 [![Tests](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-package.yml/badge.svg?branch=dev)](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-package.yml)
 
+
 A command line tool to control a set of stepper motors. Intended to serve the specific needs of Microfabricator T.
 
 # Usage
@@ -46,3 +47,5 @@ pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://
 ```bash
 motoman -v
 ```
+
+[Documentation](https://motorsmanager-cli.readthedocs.io/en/latest/#motoman)
