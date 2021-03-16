@@ -1,5 +1,7 @@
 # motoman
 ***Moto***rs ***Man***ager CLI
+[Documentation](https://motorsmanager-cli.readthedocs.io/en/latest/#motoman)
+
 
 
 [![Tests](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-package.yml/badge.svg?branch=dev)](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-package.yml)
@@ -48,4 +50,3 @@ pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://
 motoman -v
 ```
 
-[Documentation](https://motorsmanager-cli.readthedocs.io/en/latest/#motoman)
