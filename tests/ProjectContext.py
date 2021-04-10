@@ -6,4 +6,3 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 """ Imports needed by tests """
 from motoman import *
-from motoman.commands.devices import ports

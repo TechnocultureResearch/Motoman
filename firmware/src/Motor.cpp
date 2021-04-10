@@ -1,10 +1,8 @@
 #include <Arduino.h>
 #include "Serial.h"
-#include "MotorController.h"
 #include "Globals.h"
 
 void setup(){
-  setup_motor(max_speed);
   setup_serial();
 
 #ifdef DEBUG
