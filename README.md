@@ -7,10 +7,8 @@
 [![Tests](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-package.yml/badge.svg?branch=dev)](https://github.com/TechnocultureResearch/MotorsManager-CLI/actions/workflows/python-package.yml)
 
 
-A command line tool to control a set of stepper motors. Intended to serve the specific needs of Microfabricator T.
-
 # Usage
-<img width="645" alt="Screenshot 2021-03-15 at 2 27 23 AM" src="https://user-images.githubusercontent.com/33483920/111083938-1dd29400-8536-11eb-99e8-800182b5d991.png">
+...
 
 ## On Linux, MacOS
 ```bash
