@@ -1,6 +1,9 @@
 // Path: /.eslintrc.js
 
 module.exports = {
+  parserOptions: {
+    sourceType: 'module'
+  },
   // extends: ['airbnb-typescript'],
   rules: {
     'react/jsx-filename-extension': 'off',
@@ -10,7 +13,7 @@ module.exports = {
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        // moduleDirectory: ['node_modules', 'src/'],
+        moduleDirectory: ['node_modules', 'src/'],
       },
     },
   },
