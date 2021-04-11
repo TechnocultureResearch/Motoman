@@ -1,0 +1,7 @@
+{
+  "root": "app/src/",
+  "clean_urls": true,
+  "routes": {
+    "/*.html": "index.html"
+  }
+}
