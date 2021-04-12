@@ -23,7 +23,7 @@ void setup(){
     // Create a task that consumes the queue if it was created.
     xTaskCreate(TaskSerial,                // Task function
                 "Manage a shell on Serial Port", // Task Name
-                128,                       // Stack Size
+                512,                       // Stack Size
                 NULL,
                 1, // priority
                 NULL);
@@ -37,7 +37,7 @@ void setup(){
 
     xTaskCreate(TaskPollAccelerometer,     // Task function
                 "Measure rotation of the accelerometer", // Task Name
-                128,                       // Stack Size
+                512,                       // Stack Size
                 NULL,
                 1, // priority
                 NULL);
@@ -53,9 +53,8 @@ void setup(){
 
 void loop() {} // Empty Loop
 
-void print_serial_packet(
-  serial_packet_t* p){
-  Serial.println(sizeof(*p));
+void print_serial_packet(serial_packet_t* p){
+  Serial.println(p->pos.x);
 }
 
 void TaskSerial(void *pvParameters)
@@ -72,11 +71,13 @@ void TaskSerial(void *pvParameters)
       // (serial_packet_t *)malloc(sizeof(serial_packet_t));
   serial_packet_t valueFromQueue;
 
+  Serial.println("C");
   for (;;)
   {
+    Serial.println("H");
     if (xQueueReceive(serialOutQueue, &valueFromQueue, portMAX_DELAY) ==
         pdPASS) {
-      print_serial_packet(&valueFromQueue);
+      // print_serial_packet(&valueFromQueue);
     }
   }
 }
