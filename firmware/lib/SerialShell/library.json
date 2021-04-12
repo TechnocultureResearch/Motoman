@@ -1,0 +1,11 @@
+{
+  "name": "SerialShell",
+  "description": "SerialShell",
+  "keywords": "Serial, UART, Shell, Interactive",
+  "version": "0.1.0",
+  "dependencies": 
+  {
+     "SimpleSerialShell": "^0.2.1",
+     "Arduino_FreeRTOS": "10.4.3-8"
+  }
+}

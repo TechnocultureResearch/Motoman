@@ -1,0 +1,11 @@
+{
+  "name": "CurrentSensor",
+  "description": "CurrentSensor",
+  "keywords": "Current, Sensor",
+  "version": "0.1.0",
+  "dependencies": 
+  {
+     "FastPID": "^1.3.1",
+     "Arduino_FreeRTOS": "10.4.3-8"
+  }
+}
