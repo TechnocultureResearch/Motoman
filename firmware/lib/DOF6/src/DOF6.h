@@ -6,11 +6,11 @@
 #include <stdint.h>
 
 
-typedef struct {
-  int16_t x, y, z;
-} pos_t;
-
-void DOF6_init(uint16_t stack_size, QueueHandle_t &queue_handle);
+void DOF6_init(
+  uint16_t stack_size, 
+  uint8_t priority,
+  QueueHandle_t queue_handle
+);
 void TaskPollDOF6(void *);
 
 

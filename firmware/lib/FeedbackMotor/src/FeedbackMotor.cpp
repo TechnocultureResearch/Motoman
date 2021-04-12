@@ -1,11 +1,11 @@
 #include "FeedbackMotor.h"
 
-void FeedbackMotor_init(int16_t stack_size){
+void FeedbackMotor_init(uint16_t stack_size, uint8_t priority) {
   xTaskCreate(TaskControlMotor,                       // Task function
               "Control speed and direction of motor", // Task Name
               stack_size,                             // Stack Size
               NULL,
-              1, // priority
+              priority, // priority
               NULL);
 }
 
