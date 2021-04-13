@@ -4,6 +4,9 @@
 QueueHandle_t CS_SerialOutQueue;
 uint8_t device_pin;
 
+void TaskPollCurrentSense(void *);
+
+
 void CurrentSensor_init(uint16_t stack_size, uint8_t priority,
                         QueueHandle_t queue_handle, uint8_t pin) {
   xTaskCreate(TaskPollCurrentSense,      // Task function

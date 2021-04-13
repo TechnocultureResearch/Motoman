@@ -5,6 +5,9 @@
 
 QueueHandle_t DOF6_SerialOutQueue;
 
+void TaskPollDOF6(void *);
+
+
 void DOF6_init(uint16_t stack_size, uint8_t priority,
                QueueHandle_t queue_handle) {
   xTaskCreate(TaskPollDOF6,                            // Task function

@@ -11,7 +11,7 @@ void DOF6_init(
   uint8_t priority,
   QueueHandle_t queue_handle
 );
-void TaskPollDOF6(void *);
+
 
 
 #endif // DOF6_H__
