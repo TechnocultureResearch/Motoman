@@ -2,6 +2,8 @@
 #include <MPU6050.h>
 #include <Wire.h>
 
+void TaskPollDOF6(void *);
+
 
 QueueHandle_t DOF6_SerialOutQueue;
 

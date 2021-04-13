@@ -4,8 +4,11 @@
 QueueHandle_t CS_SerialOutQueue;
 uint8_t device_pin;
 
+void TaskPollCurrentSense(void *);
+
+
 void CurrentSensor_init(uint16_t stack_size, uint8_t priority,
-                        QueueHandle_t queue_handle, uint8_t pin) {
+                            QueueHandle_t queue_handle, uint8_t pin) {
   xTaskCreate(TaskPollCurrentSense,      // Task function
               "Analog Read from ACS712", // Task Name
               stack_size,                // Stack Size

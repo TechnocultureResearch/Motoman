@@ -6,6 +6,6 @@
 #include <stdint.h>
 
 void FeedbackMotor_init(uint16_t stack_size, uint8_t priority);
-void TaskControlMotor(void *);
+// void TaskControlMotor(void *);
 
 #endif // FEEDBACKMOTOR_H__
