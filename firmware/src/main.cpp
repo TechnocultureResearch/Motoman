@@ -22,6 +22,9 @@ void setup(){
   );
 
   if (serialOutQueue != NULL) {
+    // Create Tasks :
+    // with predefined stack size, priority, and queues
+
     Serial_init(128, 1, serialOutQueue);
 
     CurrentSensor_init(
@@ -29,7 +32,7 @@ void setup(){
       serialOutQueue, 
       ACS712_ANALOG_IN_PIN);
     
-    DOF6_init(128, 2, serialOutQueue);
+    DOF6_init(128, 3, serialOutQueue);
     
     FeedbackMotor_init(128, 1);
   }
