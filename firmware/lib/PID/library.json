@@ -1,7 +1,7 @@
 {
-  "name": "PID",
-  "description": "PID",
-  "keywords": "PID",
+  "name": "CurrentSensor",
+  "description": "CurrentSensor",
+  "keywords": "Current, Sensor",
   "version": "0.1.0",
   "dependencies": 
   {
