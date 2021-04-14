@@ -5,19 +5,6 @@
 #define SERIAL_1_BAUD_RATE 115200 /* Duplication in Platformio.ini */
 /* End Common */
 
-
-/*
-  ESP32
-*/
-// #ifdef ARDUINO_FREERTOS
-//   #define MPU6050_SCL_PIN 0
-//   #define MPU6050_SDA_PIN 0
-//   #define MPU6050_INT_PIN 0
-//   #define ACS712_ANALOG_IN_PIN 0
-//   #define MOTOR_ANALOG_OUT_PIN 0
-//   #define RTOS FREERTOS
-// #endif
-
 /*
   Nano
 */

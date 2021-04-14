@@ -1,8 +1,5 @@
 #include "SerialWriter.h"
 #include <Arduino.h>
-#include <SimpleSerialShell.h>
-
-#include "commands.h"
 
 QueueHandle_t SerialWriterQueue;
 void TaskSerialWriter(void *);
