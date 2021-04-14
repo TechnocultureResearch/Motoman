@@ -1,26 +1,24 @@
 #include "SerialShell.h"
 #include <Arduino.h>
+#include <Arduino_FreeRTOS.h>
 #include <SimpleSerialShell.h>
 
 #include "commands.h"
 
-QueueHandle_t SerialQueue;
-void TaskSerial(void *);
+void TaskSerialShell(void *);
 
 
-void Serial_init(uint16_t stack_size, uint8_t priority,
-                 QueueHandle_t queue_handle) {
-  xTaskCreate(TaskSerial,                      // Task function
-              "Manage a shell on Serial Port", // Task Name
-              stack_size, // Stack size                             // Stack Size
-              NULL,
-              priority, // priority
-              NULL);
-
-  SerialQueue = queue_handle;
+void SerialShell_init(uint16_t stack_size, uint8_t priority) {
+  xTaskCreate(
+      TaskSerialShell,                 // Task function
+      "Manage a shell on Serial Port", // Task Name
+      stack_size, // Stack size                             // Stack Size
+      NULL,
+      priority, // priority
+      NULL);
 }
 
-void TaskSerial(void *pvParameters) {
+void TaskSerialShell(void *pvParameters) {
   (void)pvParameters;
 
   Serial.begin(115200);
@@ -36,19 +34,8 @@ void TaskSerial(void *pvParameters) {
     vTaskDelay(1);
   }
 
-
-  int valueFromQueue;
-
   for (;;) {
     vTaskDelay(10);
     shell.executeIfInput();
-
-    if (xQueueReceive(
-      SerialQueue, 
-      &valueFromQueue, 
-      portMAX_DELAY) == pdPASS) {
-
-      Serial.println(valueFromQueue);
-    }
   }
 }
