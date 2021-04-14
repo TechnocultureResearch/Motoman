@@ -16,7 +16,7 @@ void setup() {
   pinMode(ENCODER_DIGITAL_OUT_SW, INPUT_PULLUP);
  
   // Setup Serial Monitor
-  Serial.begin(9600);
+  Serial.begin(SERIAL_1_BAUD_RATE);
  
   // Read the initial state of ENCODER_DIGITAL_OUT_CLK
   lastStateCLK = digitalRead(ENCODER_DIGITAL_OUT_CLK);

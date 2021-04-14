@@ -7,7 +7,7 @@ int input_val = 0;
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(SERIAL_1_BAUD_RATE);
 }
 
 void loop()
