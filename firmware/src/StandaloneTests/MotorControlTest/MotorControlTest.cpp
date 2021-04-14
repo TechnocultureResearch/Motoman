@@ -9,11 +9,7 @@
 // int AIN1 = 9; // Direction
 // int AIN2 = 8; // Direction
 
-// #define MOTOR_DIGITAL_OUT_STBY 10     /* TB6612fng */
-// #define MOTOR_ANALOG_OUT_SPEED_PIN 6  /* PWMA on TB6612fng */
-// #define MOTOR_DIGITAL_OUT_DIR_PIN_A 9 /* AIN1 on TB6612fng */
-// #define MOTOR_DIGITAL_OUT_DIR_PIN_B 8 /* AIN2 on TB6612fng */
-
+const int transistor = 5;
 
 // Motor B
 //int PWMB = 5;  // Speed control
@@ -54,12 +50,15 @@ void setup() {
   pinMode(MOTOR_DIGITAL_OUT_DIR_PIN_A, OUTPUT);
   pinMode(MOTOR_DIGITAL_OUT_DIR_PIN_B, OUTPUT);
 
+  pinMode (transistor, OUTPUT);
 //  pinMode(PWMB, OUTPUT);
 //  pinMode(BIN1, OUTPUT);
 //  pinMode(BIN2, OUTPUT);
 }
 
 void loop() {
+  digitalWrite (transistor, HIGH);
+  
   move(1, 255, 1); // motor 1, full speed, left
 //  move(2, 255, 1); // motor 2, full speed, left
 
