@@ -1,2 +1,2 @@
 # Pin Requirements:
-* Analog Input pin - A0
+* Analog Input pin A0
