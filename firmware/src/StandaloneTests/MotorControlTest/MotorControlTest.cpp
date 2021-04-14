@@ -1,13 +1,13 @@
 #include <Arduino.h>
 // motor A connected between A01 and A02
 // motor B connected between B01 and B02
-
-int STBY = 10; // standby
+#include "board.h"
+// int STBY = 10; // standby
 
 // Motor A
-int PWMA = 6; // Speed control
-int AIN1 = 9; // Direction
-int AIN2 = 8; // Direction
+// int PWMA = 6; // Speed control
+// int AIN1 = 9; // Direction
+// int AIN2 = 8; // Direction
 
 // Motor B
 //int PWMB = 5;  // Speed control
@@ -20,7 +20,7 @@ void move(int motor, int speed, int direction) {
   // speed: 0 is off, and 255 is full speed
   // direction: 0 clockwise, 1 counter-clockwise
 
-  digitalWrite(STBY, HIGH); // disable standby
+  digitalWrite(ENCODER_DIGITAL_OUT_STBY, HIGH); // disable standby
 
   boolean inPin1 = LOW;
   boolean inPin2 = HIGH;
@@ -31,9 +31,9 @@ void move(int motor, int speed, int direction) {
   }
 
   if (motor == 1) {
-    digitalWrite(AIN1, inPin1);
-    digitalWrite(AIN2, inPin2);
-    analogWrite(PWMA, speed);
+    digitalWrite(ENCODER_DIGITAL_OUT_AIN1, inPin1);
+    digitalWrite(ENCODER_DIGITAL_OUT_AIN2, inPin2);
+    analogWrite(ENCODER_DIGITAL_OUT_PWMA, speed);
   } else {
 //    digitalWrite(BIN1, inPin1);
 //    digitalWrite(BIN2, inPin2);
@@ -42,11 +42,11 @@ void move(int motor, int speed, int direction) {
 }
 
 void setup() {
-  pinMode(STBY, OUTPUT);
+  pinMode(ENCODER_DIGITAL_OUT_STBY, OUTPUT);
 
-  pinMode(PWMA, OUTPUT);
-  pinMode(AIN1, OUTPUT);
-  pinMode(AIN2, OUTPUT);
+  pinMode(ENCODER_DIGITAL_OUT_PWMA, OUTPUT);
+  pinMode(ENCODER_DIGITAL_OUT_AIN1, OUTPUT);
+  pinMode(ENCODER_DIGITAL_OUT_AIN2, OUTPUT);
 
 //  pinMode(PWMB, OUTPUT);
 //  pinMode(BIN1, OUTPUT);
