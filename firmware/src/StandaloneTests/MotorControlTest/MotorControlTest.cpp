@@ -9,6 +9,12 @@
 // int AIN1 = 9; // Direction
 // int AIN2 = 8; // Direction
 
+// #define MOTOR_DIGITAL_OUT_STBY 10     /* TB6612fng */
+// #define MOTOR_ANALOG_OUT_SPEED_PIN 6  /* PWMA on TB6612fng */
+// #define MOTOR_DIGITAL_OUT_DIR_PIN_A 9 /* AIN1 on TB6612fng */
+// #define MOTOR_DIGITAL_OUT_DIR_PIN_B 8 /* AIN2 on TB6612fng */
+
+
 // Motor B
 //int PWMB = 5;  // Speed control
 //int BIN1 = 11; // Direction
@@ -20,7 +26,7 @@ void move(int motor, int speed, int direction) {
   // speed: 0 is off, and 255 is full speed
   // direction: 0 clockwise, 1 counter-clockwise
 
-  digitalWrite(ENCODER_DIGITAL_OUT_STBY, HIGH); // disable standby
+  digitalWrite(MOTOR_DIGITAL_OUT_STBY, HIGH); // disable standby
 
   boolean inPin1 = LOW;
   boolean inPin2 = HIGH;
@@ -31,9 +37,9 @@ void move(int motor, int speed, int direction) {
   }
 
   if (motor == 1) {
-    digitalWrite(ENCODER_DIGITAL_OUT_AIN1, inPin1);
-    digitalWrite(ENCODER_DIGITAL_OUT_AIN2, inPin2);
-    analogWrite(ENCODER_DIGITAL_OUT_PWMA, speed);
+    digitalWrite(MOTOR_DIGITAL_OUT_DIR_PIN_A, inPin1);
+    digitalWrite(MOTOR_DIGITAL_OUT_DIR_PIN_B, inPin2);
+    analogWrite(MOTOR_ANALOG_OUT_SPEED_PIN, speed);
   } else {
 //    digitalWrite(BIN1, inPin1);
 //    digitalWrite(BIN2, inPin2);
@@ -42,11 +48,11 @@ void move(int motor, int speed, int direction) {
 }
 
 void setup() {
-  pinMode(ENCODER_DIGITAL_OUT_STBY, OUTPUT);
+  pinMode(MOTOR_DIGITAL_OUT_STBY, OUTPUT);
 
-  pinMode(ENCODER_DIGITAL_OUT_PWMA, OUTPUT);
-  pinMode(ENCODER_DIGITAL_OUT_AIN1, OUTPUT);
-  pinMode(ENCODER_DIGITAL_OUT_AIN2, OUTPUT);
+  pinMode(MOTOR_ANALOG_OUT_SPEED_PIN, OUTPUT);
+  pinMode(MOTOR_DIGITAL_OUT_DIR_PIN_A, OUTPUT);
+  pinMode(MOTOR_DIGITAL_OUT_DIR_PIN_B, OUTPUT);
 
 //  pinMode(PWMB, OUTPUT);
 //  pinMode(BIN1, OUTPUT);

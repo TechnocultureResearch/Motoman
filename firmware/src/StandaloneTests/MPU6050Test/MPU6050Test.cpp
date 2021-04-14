@@ -1,6 +1,6 @@
 #include<Arduino.h>
 
-
+#include "board.h"
 // By Arduino User JohnChi
 // August 17, 2014
 // Public Domain
@@ -13,7 +13,7 @@ void setup(){
   Wire.write(0x6B);  // PWR_MGMT_1 register
   Wire.write(0);     // set to zero (wakes up the MPU-6050)
   Wire.endTransmission(true);
-  Serial.begin(9600);
+  Serial.begin(SERIAL_1_BAUD_RATE);
 //  Serial.println("CLEARDATA");
 //  Serial.println("CLEARDATA");
 //  Serial.println("LABEL,Time,Start Time,X,Y,Z,T,Rx,Ry,Rz");
