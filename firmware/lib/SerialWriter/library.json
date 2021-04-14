@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "dependencies": 
   {
-     "Arduino_FreeRTOS": "10.4.3-8"
+    "Types": "",
+    "Arduino_FreeRTOS": "10.4.3-8"
   }
 }

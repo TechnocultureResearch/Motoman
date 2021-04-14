@@ -1,6 +1,7 @@
 {
   "dependencies": 
     {
+      "Types": "",
       "MPU6050": "^1.0.3",
       "Arduino_FreeRTOS": "10.4.3-8"
     }

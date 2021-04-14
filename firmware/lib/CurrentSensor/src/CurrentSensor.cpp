@@ -1,6 +1,9 @@
 #include "CurrentSensor.h"
 #include <Arduino.h>
 
+#include "message.h"
+
+
 QueueHandle_t CS_SerialOutQueue;
 uint8_t device_pin;
 
@@ -24,9 +27,11 @@ void TaskPollCurrentSense(void *pvParameters) {
   (void)pvParameters;
 
   for (;;) {
-    int sensorValue = analogRead(device_pin);
+    int16_t sensorValue = analogRead(device_pin);
 
-    xQueueSend(CS_SerialOutQueue, &sensorValue, portMAX_DELAY);
+    serial_packet_t packet = {.type=INT_CURRENT_DATA, .msg=sensorValue};
+
+    xQueueSend(CS_SerialOutQueue, &packet, portMAX_DELAY);
 
     vTaskDelay(1);
   }

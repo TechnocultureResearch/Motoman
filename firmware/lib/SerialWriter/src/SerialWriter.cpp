@@ -1,6 +1,9 @@
 #include "SerialWriter.h"
 #include <Arduino.h>
 
+#include "message.h"
+
+
 QueueHandle_t SerialWriterQueue;
 void TaskSerialWriter(void *);
 
@@ -26,13 +29,14 @@ void TaskSerialWriter(void *pvParameters) {
     vTaskDelay(1);
   }
 
-  int valueFromQueue = 0;
+  serial_packet_t valueFromQueue;
 
   for (;;) {
     if (xQueueReceive(SerialWriterQueue, &valueFromQueue, portMAX_DELAY) ==
         pdPASS) {
 
-      Serial.println(valueFromQueue);
+      // Serial.println(valueFromQueue.msg);
+      PRINT_MESSAGE(Serial, valueFromQueue);
     }
   }
 }

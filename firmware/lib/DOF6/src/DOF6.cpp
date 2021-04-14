@@ -2,6 +2,7 @@
 #include <MPU6050.h>
 #include <Wire.h>
 
+#include "message.h"
 
 QueueHandle_t DOF6_SerialOutQueue;
 
@@ -35,10 +36,13 @@ void TaskPollDOF6(void *pvParameters) {
       &ax, &ay, &az, &gx, &gy, &gz
     );
 
-    xQueueSend(
-      DOF6_SerialOutQueue, 
-      &gx, 
-      portMAX_DELAY);
+    serial_packet_t packet_gx = {.type = INT_ACCEL_DATA_GX, .msg = gx};
+    serial_packet_t packet_gy = {.type = INT_ACCEL_DATA_GY, .msg = gy};
+    serial_packet_t packet_gz = {.type = INT_ACCEL_DATA_GZ, .msg = gz};
+
+    xQueueSend(DOF6_SerialOutQueue, &packet_gx, portMAX_DELAY);
+    xQueueSend(DOF6_SerialOutQueue, &packet_gy, portMAX_DELAY);
+    xQueueSend(DOF6_SerialOutQueue, &packet_gz, portMAX_DELAY);
 
     vTaskDelay(1);
   }
