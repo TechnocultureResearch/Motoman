@@ -13,9 +13,11 @@
 #include "DOF6.h"
 #include "FeedbackMotor.h"
 #include "PID.h"
-// #include "SerialShell.h"
 #include "SerialWriter.h"
 #include "InputEncoder.h"
+
+// #include "SerialShell.h"
+
 
 QueueHandle_t serialOutQueue;
 
@@ -25,9 +27,11 @@ void setup(){
   // breakpoint();
   #endif
 
-  serialOutQueue = xQueueCreate(
-    10,         // Queue length
-    sizeof(message_type_t) // Queue item size
+  serialOutQueue = xQueueCreate(10,                    // Queue length
+                                sizeof(message_type_t) // Queue item size
+  );
+  serialOutQueue = xQueueCreate(10,                    // Queue length
+                                sizeof(message_type_t) // Queue item size
   );
 
   if (serialOutQueue != NULL) {
@@ -48,6 +52,8 @@ void setup(){
       serialOutQueue, ENCODER_DIGITAL_OUT_CLK,
       ENCODER_DIGITAL_OUT_DT, ENCODER_DIGITAL_OUT_SW
     );
+
+    PID_init(128, 1, serialOutQueue, 0, 0, 0, 0);
 
     Serial_init(128, 1, serialOutQueue, 115200);
   }

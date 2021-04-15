@@ -9,11 +9,14 @@ typedef enum {
   INT_ACCEL_DATA_GZ,
   INT_ACCEL_DATA_AX,
   INT_ACCEL_DATA_AY,
-  INT_CURRENT_DATA,
-  INT_ENCODER_DATA,
+  INT_ACCEL_DATA_AZ,
+  // INT_VERTICAL_ANGLE
+  // INT_ROTATIONAL_ANGLE
+  INT_CURRENT_DATA, // BOOL_CURRENT_OVERDRAW_FLAG
+  INT_ENCODER_DATA, // INT_ENCODER_OFFSET
   INT_ENCODER_BUTTON_PRESSED,
-  INT_MOTOR_SPEED_DATA,
-  INT_MOTOR_DIRECTION_DATA,
+  INT_MOTOR_SPEED_DATA,     // 0 <= speed <= 100
+  INT_MOTOR_DIRECTION_DATA, // {-1, 1}
   NO_MESSAGE
 } message_type_t;
 
@@ -23,6 +26,7 @@ static const char *message_string[] = {
     "GZ",
     "AX", 
     "AY", 
+    "AZ",
     "C",
     "EN", 
     "BTN"
