@@ -11,6 +11,7 @@ typedef enum {
   INT_ACCEL_DATA_AY,
   INT_CURRENT_DATA,
   INT_ENCODER_DATA,
+  INT_ENCODER_BUTTON_PRESSED,
   INT_MOTOR_SPEED_DATA,
   INT_MOTOR_DIRECTION_DATA,
   NO_MESSAGE
@@ -23,7 +24,8 @@ static const char *message_string[] = {
     "AX", 
     "AY", 
     "C",
-    "EN",  
+    "EN", 
+    "BTN"
     "SPEED", 
     "DIR", 
     "NULL"

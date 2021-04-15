@@ -4,8 +4,11 @@
   "keywords": "Serial, UART, Shell, Interactive",
   "version": "0.1.0",
   "dependencies": 
-  {
-     "SimpleSerialShell": "^0.2.1",
-     "Arduino_FreeRTOS": "10.4.3-8"
-  }
+  [
+    {
+        "owner": "feilipu",
+        "name": "Arduino_FreeRTOS",
+        "version": "10.4.3-8"
+    }
+  ]
 }
