@@ -5,6 +5,10 @@
 #include <Arduino_FreeRTOS.h>
 #include <queue.h>
 
+#ifdef DEBUG
+#include "avr8-stub.h"
+#endif
+
 #include "CurrentSensor.h"
 #include "DOF6.h"
 #include "FeedbackMotor.h"
@@ -16,6 +20,11 @@
 QueueHandle_t serialOutQueue;
 
 void setup(){
+  #ifdef DEBUG
+  debug_init();
+  // breakpoint();
+  #endif
+
   serialOutQueue = xQueueCreate(
     10,         // Queue length
     sizeof(message_type_t) // Queue item size
@@ -40,7 +49,7 @@ void setup(){
       ENCODER_DIGITAL_OUT_DT, ENCODER_DIGITAL_OUT_SW
     );
 
-    Serial_init(128, 1, serialOutQueue);
+    Serial_init(128, 1, serialOutQueue, 115200);
   }
 }
 

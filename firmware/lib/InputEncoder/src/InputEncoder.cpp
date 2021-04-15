@@ -48,8 +48,6 @@ void InputEncoder_init(uint16_t stack_size, uint8_t priority,
 }
 
 void event_button_pressed() {
-  Serial.println("Button pressed!");
-
   serial_packet_t packet = {
     .type = INT_ENCODER_BUTTON_PRESSED, 
     .msg = 1
@@ -63,7 +61,8 @@ void event_encoder_rotated(const int direction, const int counter) {
   // Serial.print("Encoder Position: ");
   // Serial.println(counter);
   if(direction == 0) {
-    Serial.println("Error!");
+    // Serial.println("Error!");
+    // TODO: Add error handling
     vTaskSuspendAll();
   }
 
