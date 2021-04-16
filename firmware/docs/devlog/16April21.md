@@ -1,4 +1,4 @@
-# Multple Queues Added
+# Multiple Queues Added
 
 Single Consumers, Multiple Producers
 1. `MotorQueue`
