@@ -1,34 +1,10 @@
-#include <Arduino.h>
-#include "board.h"
-#include "message.h"
+#include "firmware.h"
 
-#include <Arduino_FreeRTOS.h>
-#include <queue.h>
-
-#ifdef DEBUG
-#include "avr8-stub.h"
-#endif
-
-#include "CurrentSensor.h"
-#include "DOF6.h"
-#include "FeedbackMotor.h"
-#include "OffsetEncoder.h"
-#include "PID.h"
-#include "SerialWriter.h"
-
-// #include "SerialShell.h"
 
 QueueHandle_t SerialOutQueue;
 QueueHandle_t MotorOutQueue;
 QueueHandle_t PositionQueue;
 
-#define STACK_SIZE_SMALL 128
-#define STACK_SIZE_LARGE 1024
-#define PRIORITY_LOW 1
-#define PRIORITY_MID 2
-#define PRIORITY_HIGH 3
-
-#define QUEUE_SIZE_SMALL 10
 
 void setup(){
   #ifdef DEBUG
