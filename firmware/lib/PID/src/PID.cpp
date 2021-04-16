@@ -6,7 +6,9 @@
 // #define PIN_SETPOINT A1
 // #define PIN_OUTPUT 9
 
-QueueHandle_t PIDOutputQueue;
+QueueHandle_t PID_MotorQueue;
+QueueHandle_t PID_PositionQueue;
+QueueHandle_t PID_SerialOutQueue;
 void TaskPIDController(void *);
 
 float Kp = 0.1, Ki = 0.5, Kd = 0, Hz = 10;
@@ -16,7 +18,10 @@ bool output_signed = false;
 ;//(Kp, Ki, Kd, Hz, output_bits, output_signed);
 FastPID myPID(Kp, Ki, Kd, Hz, output_bits, output_signed);
 
-void PID_init(uint16_t stack_size, uint8_t priority, QueueHandle_t queue_handle,
+void PID_init(uint16_t stack_size, uint8_t priority, //
+              QueueHandle_t motor_queue_handle,      //
+              QueueHandle_t position_queue_handle,      //
+              QueueHandle_t serial_out_queue_handle, //
               float Kp, float Ki, float Kd, float Hz) {
   xTaskCreate(
       TaskPIDController,        // Task function
@@ -26,7 +31,9 @@ void PID_init(uint16_t stack_size, uint8_t priority, QueueHandle_t queue_handle,
       priority, // priority
       NULL);
 
-  PIDOutputQueue = queue_handle;
+  PID_MotorQueue = motor_queue_handle;
+  PID_PositionQueue = position_queue_handle;
+  PID_SerialOutQueue = serial_out_queue_handle;
 }
 
 void TaskPIDController(void *pvParameters) {

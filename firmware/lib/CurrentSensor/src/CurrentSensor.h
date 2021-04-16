@@ -6,6 +6,8 @@
 #include <stdint.h>
 
 void CurrentSensor_init(uint16_t stack_size, uint8_t priority,
-                        QueueHandle_t queue_handle, uint8_t pin);
+                        QueueHandle_t position_queue_handle, // 
+                        QueueHandle_t serial_out_queue_handle, // 
+                        uint8_t pin);
 
 #endif // CURRENT_SENSOR_H__

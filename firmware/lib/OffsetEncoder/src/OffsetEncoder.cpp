@@ -1,10 +1,10 @@
-#include "InputEncoder.h"
+#include "OffsetEncoder.h"
 #include "message.h"
 
 #include <Arduino.h>
 
-
-QueueHandle_t IE_SerialOutQueue;
+QueueHandle_t OE_SerialOutQueue;
+QueueHandle_t OE_PositionQueue;
 
 typedef struct {
   uint8_t clk;
@@ -26,19 +26,22 @@ uint32_t g_last_button_press = 0;
 
 
 // Forward declarations
-void TaskPollInputEncoder(void *);
+void TaskPollOffsetEncoder(void *);
 
-void InputEncoder_init(uint16_t stack_size, uint8_t priority,
-                       QueueHandle_t queue_handle,
-                       uint8_t pin_clk, uint8_t pin_dt, uint8_t pin_sw) {
-  xTaskCreate(TaskPollInputEncoder,      // Task function
-            "Poll Input Encoder", // Task Name
-            stack_size,                // Stack Size
-            NULL,
-            priority, // priority
-            NULL);
+void OffsetEncoder_init(uint16_t stack_size, uint8_t priority, // 
+                        QueueHandle_t position_queue_handle, // 
+                        QueueHandle_t serial_out_queue_handle, // 
+                        uint8_t pin_clk,
+                        uint8_t pin_dt, uint8_t pin_sw) {
+  xTaskCreate(TaskPollOffsetEncoder, // Task function
+              "Poll Input Encoder",  // Task Name
+              stack_size,            // Stack Size
+              NULL,
+              priority, // priority
+              NULL);
 
-  IE_SerialOutQueue = queue_handle;
+  OE_SerialOutQueue = serial_out_queue_handle;
+  OE_PositionQueue = position_queue_handle;
 
   device_pins = {
     .clk = pin_clk,
@@ -49,15 +52,14 @@ void InputEncoder_init(uint16_t stack_size, uint8_t priority,
 
 void event_button_pressed() {
   serial_packet_t packet = {
-    .type = INT_ENCODER_BUTTON_PRESSED, 
+    .type = BOOL_ENCODER_BUTTON_PRESSED, 
     .msg = 1
   };
 
-  xQueueSend(IE_SerialOutQueue, &packet, portMAX_DELAY);
+  xQueueSend(OE_SerialOutQueue, &packet, portMAX_DELAY);
 }
 
 void event_encoder_rotated(const int direction, const int counter) {
-
   // Serial.print("Encoder Position: ");
   // Serial.println(counter);
   if(direction == 0) {
@@ -66,13 +68,13 @@ void event_encoder_rotated(const int direction, const int counter) {
     vTaskSuspendAll();
   }
 
-  serial_packet_t packet = {.type = INT_ENCODER_DATA,
+  serial_packet_t packet = {.type = INT_ENCODER_OFFSET,
                             .msg = direction*counter};
 
-  xQueueSend(IE_SerialOutQueue, &packet, portMAX_DELAY);
+  xQueueSend(OE_SerialOutQueue, &packet, portMAX_DELAY);
 }
 
-void TaskPollInputEncoder(void *pvParameters) {
+void TaskPollOffsetEncoder(void *pvParameters) {
   (void)pvParameters;
 
   // Set encoder pins as inputs

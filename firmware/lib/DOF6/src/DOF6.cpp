@@ -5,23 +5,25 @@
 #include "message.h"
 
 QueueHandle_t DOF6_SerialOutQueue;
+QueueHandle_t DOF6_PositionQueue;
 
 void TaskPollDOF6(void *);
 
-
 void DOF6_init(uint16_t stack_size, uint8_t priority,
-               QueueHandle_t queue_handle) {
+               QueueHandle_t serial_out_queue_handle,
+               QueueHandle_t position_queue_handle) {
   xTaskCreate(TaskPollDOF6,                            // Task function
               "Measure rotation of the accelerometer", // Task Name
               stack_size, //                                     // Stack Size
               NULL,
               priority, // priority
               NULL);
-  DOF6_SerialOutQueue = queue_handle;
+
+  DOF6_SerialOutQueue = serial_out_queue_handle;
+  DOF6_PositionQueue = position_queue_handle;
 }
 
-
-int getVerticalAngle(MPU6050& mpu) {
+int getRollerAngle(MPU6050& mpu) {
   int16_t ax, ay, az;
   int16_t gx, gy, gz;
 
@@ -59,9 +61,14 @@ void TaskPollDOF6(void *pvParameters) {
   accel.initialize();
 
   for (;;) {
-    int angle = getVerticalAngle(accel);
-    serial_packet_t packet_vert_angle = {.type = INT_ACCEL_DATA_GZ, .msg = angle};
-    xQueueSend(DOF6_SerialOutQueue, &packet_vert_angle, portMAX_DELAY);
+    int angle = getRollerAngle(accel);
+    
+    serial_packet_t packet_roller_angle = {
+      .type = INT_ROLLER_ANGLE, 
+      .msg = angle};
+    
+    xQueueSend(DOF6_SerialOutQueue, &packet_roller_angle, portMAX_DELAY);
+    xQueueSend(DOF6_PositionQueue, &packet_roller_angle, portMAX_DELAY);
 
     vTaskDelay(1);
   }

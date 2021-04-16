@@ -3,8 +3,18 @@
 
 #include "message.h"
 
+#ifdef DEBUG
+#include "avr8-stub.h"
+#endif
 
+#ifndef BOARD_NANO
+#define CONSOLE Serial1
+#endif
+
+#ifdef BOARD_NANO
 #define CONSOLE Serial
+#endif
+
 QueueHandle_t SerialWriterQueue;
 static int32_t g_baud_rate = 0;
 
@@ -41,6 +51,10 @@ void TaskSerialWriter(void *pvParameters) {
   for (;;) {
     if (xQueueReceive(SerialWriterQueue, &valueFromQueue, portMAX_DELAY) ==
         pdPASS) {
+      #ifdef DEBUG
+      breakpoint();
+      #endif
+
       PRINT_MESSAGE(CONSOLE, valueFromQueue);
     }
   }
