@@ -2,7 +2,7 @@
 
 #include "board.h"
 
-#include <PID_v1.h>
+#include <FastPID.h>
 
 #define RAD_TO_DEG(x) x *(180.0 / 3.14159)
 
@@ -15,12 +15,18 @@ int16_t AcX, AcY, AcZ, Tmp, GyX, GyY, GyZ;
 // Define Variables we'll be connecting to
 double Setpoint, Input, Output;
 
-// Define the aggressive and conservative Tuning Parameters
-double aggKp = 4, aggKi = 0.2, aggKd = 1;
-double consKp = 1, consKi = 0.05, consKd = 0.25;
+// // Define the aggressive and conservative Tuning Parameters
+// double aggKp = 4, aggKi = 0.2, aggKd = 1;
+// double consKp = 1, consKi = 0.05, consKd = 0.25;
 
 // Specify the links and initial tuning parameters
-PID myPID(&Input, &Output, &Setpoint, aggKp, aggKi, aggKp, DIRECT);
+// PID myPID(&Input, &Output, &Setpoint, aggKp, aggKi, aggKp, DIRECT);
+
+double Kp = 0.1, Ki = 0.5, Kd = 0, Hz = 10;
+int output_bits = 8;
+bool output_signed = true;
+
+FastPID myPID(Kp, Ki, Kd, Hz, output_bits, output_signed);
 
 void getMotion6(int16_t *ax, int16_t *ay, int16_t *az, int16_t *gx, int16_t *gy,
                 int16_t *gz) {
@@ -103,23 +109,17 @@ void PID_task() {
   Serial.println(Input);
 
   double gap = Setpoint - Input; // distance away from setpoint
-  // if (abs(gap) < 10) { 
-  //   // we're close to setpoint, use conservative tuning parameters
-  //   myPID.SetTunings(consKp, consKi, consKd);
-  // } else {
-    // we're far from setpoint, use aggressive tuning parameters
-    myPID.SetTunings(aggKp, aggKi, aggKd);
-  // }
 
-  myPID.Compute();
+  // myPID.Compute();
+  uint8_t Output = myPID.step(Setpoint, gap);
   Serial.println(Output);
 
   int dir = -1;
   if (gap < 0) { dir = 1; } 
   else if (gap > 0) { dir = 0; }
-  // Serial.println(gap);
-  // Serial.println(dir);
-  move(1, (int) Output, dir);
+  // // Serial.println(gap);
+  // // Serial.println(dir);
+  move(1, Output, dir);
   // move(1, 50, 0);
   // analogWrite(PIN_OUTPUT, Output);
 }
@@ -130,9 +130,6 @@ void setup() {
   pinMode(MOTOR_ANALOG_OUT_SPEED_PIN, OUTPUT);
   pinMode(MOTOR_DIGITAL_OUT_DIR_PIN_A, OUTPUT);
   pinMode(MOTOR_DIGITAL_OUT_DIR_PIN_B, OUTPUT);
-
-  // turn the PID on
-  myPID.SetMode(AUTOMATIC);
 
   Wire.begin();
   Wire.beginTransmission(MPU_addr);
