@@ -31,7 +31,7 @@ void setup(){
   pinMode(ADC_PIN, INPUT);
   pinMode(PWM_PIN, OUTPUT);
   //  analogReference(INTERNAL);            
-  analogReadResolution(12);
+  // analogReadResolution(12);
   
   analogWrite(PWM_PIN, 255);
 
