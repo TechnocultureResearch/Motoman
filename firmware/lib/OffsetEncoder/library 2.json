@@ -1,0 +1,10 @@
+{
+  "dependencies": 
+  [
+    {
+        "owner": "feilipu",
+        "name": "Arduino_FreeRTOS",
+        "version": "10.4.3-8"
+    }
+  ]
+}
