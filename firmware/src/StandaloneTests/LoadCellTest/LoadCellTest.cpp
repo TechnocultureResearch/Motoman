@@ -2,8 +2,8 @@
 
 #include <Q2HX711.h>
 
-const byte hx711_data_pin = 3;
-const byte hx711_clock_pin = 4;
+const byte hx711_data_pin = 8;
+const byte hx711_clock_pin = 9;
 
 float y1 = 20.0; // calibrated mass to be added
 long x1 = 0L;
@@ -13,7 +13,7 @@ float avg_size = 10.0; // amount of averages for each mass measurement
 Q2HX711 hx711(hx711_data_pin, hx711_clock_pin); // prep hx711
 
 void setup() {
-  Serial.begin(9600); // prepare serial port
+  Serial.begin(115200); // prepare serial port
   delay(1000); // allow load cell and hx711 to settle
   // tare procedure
   for (int ii=0;ii<int(avg_size);ii++){
