@@ -1,14 +1,26 @@
 This test is a direct clone from this example: [Arduino Weighing Scale with Load Cell and HX711, Joshua Hrisko, 20 May 2019](https://makersportal.com/blog/2019/5/12/arduino-weighing-scale-with-load-cell-and-hx711)
 
-CONNECTION DETAILS :
-(a) Red (E+) to J25-1
-(b) Black (E-) to J25-2
-(c) White (A-) to J25-3
-(d) Green (A+) to J25-4
+### CONNECTION DETAILS :
+Load Cell | Color Code | J25 JST connection
+--- | --- | ---
+E+ | Red | 1
+E- | Black | 2
+A- | White | 3
+A+ | Green | 4
 
-(e) DT to D9
-(f) SCK to D8
 
-Screenshot for stand-alone test result :
+Load Cell | Arduino Mega 
+--- | --- 
+DT | D9 
+SCK | D8 
+
+![image](https://user-images.githubusercontent.com/72598327/119227464-9869f200-bb2b-11eb-9b02-6703930648e4.png)
+
+##### *net names reversed. Take care!
+
+
+### SCREENSHOT FOR STAND-ALONE TEST RESULT :
+![image](https://user-images.githubusercontent.com/72598327/119227414-5771dd80-bb2b-11eb-8804-0a4578665004.png)
+
 
 
