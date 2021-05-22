@@ -1,2 +1,1 @@
-This standalone test is a straight clone taken from " https://makersportal.com/blog/2019/5/12/arduino-weighing-scale-with-load-cell-and-hx711 ".
-Pins D3 and D4 of Arduino Nano are used to establish connection between HX711 and Nano.
+
