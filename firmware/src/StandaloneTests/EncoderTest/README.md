@@ -1,3 +1,5 @@
+This test is a direct clone from this example: [Rotatory encoder interface with Arduino](https://lastminuteengineers.com/rotary-encoder-arduino-tutorial/)
+
 ### PIN REQUIREMENTS (ARDUINO MEGA) :
 #### 1. Rotatory Encoder RE1
 * ENCODER_DIGITAL_OUT_CLK 45
