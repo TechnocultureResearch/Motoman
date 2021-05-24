@@ -1,4 +1,4 @@
-### PIN REQUIREMENTS:
+### PIN REQUIREMENTS (ARDUINO MEGA) :
 * Analog Input Pin A11 for CM5
 * Analog Input Pin A12 for CM4
 * Analog Input Pin A13 for CM3
