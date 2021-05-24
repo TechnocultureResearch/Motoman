@@ -1,3 +1,7 @@
+This test is a direct clone from this example: [Arduino interface with LDR](https://create.arduino.cc/projecthub/SBR/working-with-light-dependent-resistor-ldr-1ded4f).
+
+Another reference link relevant to this test is linked here : [Hall effect current sensor circuit](https://theorycircuit.com/hall-effect-current-sensor-circuit/).
+
 ### PIN REQUIREMENTS (ARDUINO MEGA) :
 * Analog Input Pin A11 for CM5
 * Analog Input Pin A12 for CM4
