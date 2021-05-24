@@ -1,3 +1,5 @@
+This test is a direct clone from this example: [Controlling 2 motors with TB6612FNG & Arduino](http://bildr.org/2012/04/tb6612fng-arduino/).
+
 ### PIN REQUIREMENTS (ARDUINO MEGA) :
 
 #### 1. Motor Driver M1 & M2
