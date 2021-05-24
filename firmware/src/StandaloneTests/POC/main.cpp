@@ -15,9 +15,9 @@ void setup() {
   setup_mpu6050();
   setup_encoder();
 
-  // Serial.println(getPosition());
   // Setpoint = 90; // IMPORTANT
   Setpoint = getPosition() + 90;
+  // Serial.println(getPosition());
 }
 
 

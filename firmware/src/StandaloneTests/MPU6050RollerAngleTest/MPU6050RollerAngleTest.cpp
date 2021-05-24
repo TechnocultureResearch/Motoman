@@ -1,5 +1,8 @@
 #include<Arduino.h>
 
+#define minVal 265
+#define maxVal 402
+
 #include "board.h"
 // By Arduino User JohnChi
 // August 17, 2014
@@ -57,10 +60,26 @@ int getRollerAngle(int16_t *ax, int16_t *ay, int16_t *az, int16_t *gx,
 
   double avX = x / repeatCount;
   double avY = y / repeatCount;
+  double avZ = z / repeatCount;
 
-  int verticalAngle = atan2(avX - 507, avY - 520) / 3.14159 * 180.0;
+  // int verticalAngle = atan2(avX - 507, avY - 520) / 3.14159 * 180.0;
   // Serial.println(verticalAngle);
-  return verticalAngle;
+  // return verticalAngle;
+
+  int xAng = avX - 507;//map(AcX,minVal,maxVal,-90,90);
+  int yAng = avY - 520;//map(AcY,minVal,maxVal,-90,90);
+  int zAng = avZ - 500;//map(AcZ,minVal,maxVal,-90,90);
+  
+  int _x= RAD_TO_DEG * (atan2(-yAng, -zAng)+PI);
+  int _y= RAD_TO_DEG * (atan2(-xAng, -zAng)+PI);
+  int _z= RAD_TO_DEG * (atan2(-yAng, -xAng)+PI);
+
+  Serial.println(_x);
+  Serial.println(_y);
+  Serial.println(_z);
+
+  // double verticalAngle = atan2(avX - 507, avY - 520);
+  return _z;//(RAD_TO_DEG * verticalAngle);
 }
 
 void loop(){

@@ -59,7 +59,7 @@ void setup() {
 void loop() {
 //   digitalWrite (transistor, HIGH);
   
-  move(1, 255, 1); // motor 1, full speed, left
+  move(1, 128, 1); // motor 1, full speed, left
 //  move(2, 255, 1); // motor 2, full speed, left
 
   delay(1000); //go for 1 second
