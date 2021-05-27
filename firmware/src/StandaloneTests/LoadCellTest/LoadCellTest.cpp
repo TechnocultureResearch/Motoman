@@ -2,8 +2,8 @@
 
 #include <Q2HX711.h>
 
-const byte hx711_data_pin = 8;
-const byte hx711_clock_pin = 9;
+const byte hx711_data_pin = 9;
+const byte hx711_clock_pin = 8;
 
 float y1 = 20.0; // calibrated mass to be added
 long x1 = 0L;
