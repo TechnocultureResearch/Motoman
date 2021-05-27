@@ -21,6 +21,7 @@ SCK | D8
 
 ### SCREENSHOT FOR STAND-ALONE TEST RESULT :
 ![image](https://user-images.githubusercontent.com/72598327/119227414-5771dd80-bb2b-11eb-8804-0a4578665004.png)
+<img width="203" alt="Screenshot 2021-05-27 at 6 06 55 PM (1)" src="https://user-images.githubusercontent.com/51263810/119827864-3a685080-bf17-11eb-8a09-bc27e57b38ad.png">
 
 
 
