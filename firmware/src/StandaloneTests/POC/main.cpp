@@ -5,6 +5,9 @@
 #include "motion.h"
 #include "pid.h"
 #include "encoder.h"
+#include "util.h"
+
+// #define NODEBUG
 
 #define SERIAL_1_BAUD_RATE 115200
 
@@ -17,17 +20,16 @@ void setup() {
 
   // Setpoint = 90; // IMPORTANT
   Setpoint = getPosition() + 90;
-  // Serial.println(getPosition());
 }
 
 
 void mock_move(int motor, int speed, int dir) {
-  Serial.println("mock motor: move");
+  PRINT("mock motor: move");
 }
 
 void loop() {
   // PID_task(&mock_move);
-  PID_task(&move);
+  PID_task(&move, &getRollerAngle);
   Setpoint = getPosition() + 90;
-  Serial.println(Setpoint);
+//   PRINT(Setpoint);
 }

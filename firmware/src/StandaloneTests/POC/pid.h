@@ -4,6 +4,7 @@
 #include <FastPID.h>
 
 typedef void (*motor_callback)(int, int, int);
+typedef double (*feedback_angle)();
 
 double Setpoint, Input, Output;
 
@@ -13,9 +14,9 @@ bool output_signed = true;
 
 FastPID myPID(Kp, Ki, Kd, Hz, output_bits, output_signed);
 
-void PID_task(motor_callback callback) {
-  Input = getRollerAngle();
-  // Serial.println(Input);
+void PID_task(motor_callback callback, feedback_angle get_angle) {
+  Input = get_angle();
+  Serial.println((int)Input);
 
   double gap = Setpoint - Input; // distance away from setpoint
 
