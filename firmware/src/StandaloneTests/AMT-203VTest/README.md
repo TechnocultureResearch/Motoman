@@ -1,0 +1,6 @@
+### PIN REQUIREMENTS (ARDUINO MEGA) :
+* CSB Pin D2
+
+
+### SCREENSHOT FOR STAND-ALONE TEST RESULTS :
+![Capture](https://user-images.githubusercontent.com/51263810/120012354-036c6a80-bffd-11eb-8f81-aa8411243606.JPG)
