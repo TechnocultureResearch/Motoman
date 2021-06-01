@@ -5,30 +5,10 @@
 #define SERIAL_1_BAUD_RATE 115200 /* Duplication in Platformio.ini */
 /* End Common */
 
-
 /*
   Mega
 */
 #ifdef BOARD_MEGA
-  #define MPU6050_SCL_PIN A5 /* Not used directly */
-  #define MPU6050_SDA_PIN A4 /* Not used directly */
-  #define MPU6050_INT_PIN /* Unused */
-
-
-
-
-// Current Sensor 5(CM5) pinout
-  #define ACS712_ANALOG_IN_PIN A11
-
-// Current Sensor 4(CM4) pinout
-  #define ACS712_ANALOG_IN_PIN A12
-
-// Current Sensor 3(CM3) pinout
-  #define ACS712_ANALOG_IN_PIN A13
-
-
-
-
 // Rotary Encoder 1(RE1) pinout
   #define RE1_ENCODER_DIGITAL_OUT_CLK 45
   #define RE1_ENCODER_DIGITAL_OUT_DT 43
@@ -38,9 +18,6 @@
   #define RE2_ENCODER_DIGITAL_OUT_CLK 27
   #define RE2_ENCODER_DIGITAL_OUT_DT 25
   #define RE2_ENCODER_DIGITAL_OUT_SW 23
-
-
-
 
 
 // Motor 5(M5) pinout
@@ -59,41 +36,27 @@
   #define M4_MOTOR_DIGITAL_OUT_DIR_PIN_B 32 /* BIN2 on TB6612FNG */
 
 
-
-
 // Load Cell pinout
   #define LOAD_CELL_DIGITAL_OUT_DT 9
   #define LOAD_CELL_DIGITAL_OUT_SCK 8
-
-
 
 
 // Absulute Encoder pinout
   #define AB_ENCODER_DIGITAL_OUT_CHIP_SELECT 2  /* CSB on AMT203-V */
 
 
-
-#endif
-
-
-/*
-  Nano
-*/
-#ifdef BOARD_NANO
   #define MPU6050_SCL_PIN A5 /* Not used directly */
   #define MPU6050_SDA_PIN A4 /* Not used directly */
   #define MPU6050_INT_PIN    /* Unused */
-
-  #define ACS712_ANALOG_IN_PIN A0
-
-  #define ENCODER_DIGITAL_OUT_CLK 2
-  #define ENCODER_DIGITAL_OUT_DT 3
-  #define ENCODER_DIGITAL_OUT_SW 4
-
-  #define MOTOR_DIGITAL_OUT_STBY 10     /* TB6612FNG */
-  #define MOTOR_ANALOG_OUT_SPEED_PIN 6  /* PWMA on TB6612FNG */
-  #define MOTOR_DIGITAL_OUT_DIR_PIN_A 9 /* AIN1 on TB6612FNG */
-  #define MOTOR_DIGITAL_OUT_DIR_PIN_B 8 /* AIN2 on TB6612FNG */
+  
+  // // Current Sensor 5(CM5) pinout
+  //   #define ACS712_ANALOG_IN_PIN A11
+  
+  // // Current Sensor 4(CM4) pinout
+  //   #define ACS712_ANALOG_IN_PIN A12
+  
+  // // Current Sensor 3(CM3) pinout
+  //   #define ACS712_ANALOG_IN_PIN A13
 #endif
 
 

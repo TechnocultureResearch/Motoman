@@ -22,7 +22,8 @@ void setup() {
 
 //   Setpoint = 0; // IMPORTANT
 
-// move(2, 100, 1);
+  move(1, 100, 1);
+  move(2, 100, 1);
 }
 
 void loop() {

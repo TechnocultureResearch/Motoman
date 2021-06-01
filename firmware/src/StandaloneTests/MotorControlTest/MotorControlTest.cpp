@@ -33,9 +33,9 @@ void move(int motor, int speed, int direction) {
   }
 
   if (motor == 1) {
-    digitalWrite(MOTOR_DIGITAL_OUT_DIR_PIN_A, inPin1);
-    digitalWrite(MOTOR_DIGITAL_OUT_DIR_PIN_B, inPin2);
-    analogWrite(MOTOR_ANALOG_OUT_SPEED_PIN, speed);
+    digitalWrite(M3_MOTOR_DIGITAL_OUT_DIR_PIN_A, inPin1);
+    digitalWrite(M3_MOTOR_DIGITAL_OUT_DIR_PIN_B, inPin2);
+    analogWrite(M3_MOTOR_ANALOG_OUT_SPEED_PIN, speed);
   } else {
 //    digitalWrite(BIN1, inPin1);
 //    digitalWrite(BIN2, inPin2);
@@ -46,9 +46,9 @@ void move(int motor, int speed, int direction) {
 void setup() {
   pinMode(MOTOR_DIGITAL_OUT_STBY, OUTPUT);
 
-  pinMode(MOTOR_ANALOG_OUT_SPEED_PIN, OUTPUT);
-  pinMode(MOTOR_DIGITAL_OUT_DIR_PIN_A, OUTPUT);
-  pinMode(MOTOR_DIGITAL_OUT_DIR_PIN_B, OUTPUT);
+  pinMode(M3_MOTOR_ANALOG_OUT_SPEED_PIN, OUTPUT);
+  pinMode(M3_MOTOR_DIGITAL_OUT_DIR_PIN_A, OUTPUT);
+  pinMode(M3_MOTOR_DIGITAL_OUT_DIR_PIN_B, OUTPUT);
 
 //   pinMode (transistor, OUTPUT);
 //  pinMode(PWMB, OUTPUT);

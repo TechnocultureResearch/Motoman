@@ -4,12 +4,12 @@
 #include <FastPID.h>
 #include "util.hpp"
 
-typedef void (*motor_callback)(int, int, int);
+typedef void (*motor_callback)(uint8_t, uint8_t, int8_t);
 typedef double (*feedback_angle)();
 
 double Input, Output;
 
-double Kp = 0.1, Ki = 0.5, Kd = 0.1, Hz = 10;
+double Kp = 0.5, Ki = 0.5, Kd = 0.1, Hz = 10;
 int output_bits = 8;
 bool output_signed = true;
 
@@ -28,7 +28,7 @@ void PID_task(motor_callback callback, feedback_angle get_angle,
 //   PRINT(abs(Output));
 //   PRINT(sgn<int8_t>(Output));
 
-  callback(1, abs(Output), sgn<int8_t>(Output));
+  callback(0, abs(Output), sgn<int8_t>(Output));
 }
 
 #endif
