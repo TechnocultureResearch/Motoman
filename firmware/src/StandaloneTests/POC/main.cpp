@@ -22,11 +22,11 @@ void setup() {
 
 //   Setpoint = 0; // IMPORTANT
 
-move(2, 100, 1);
+// move(2, 100, 1);
 }
 
 void loop() {
-//   Setpoint = 100 + getPosition();
-  PID_task(&move, &getRotaryAngle, 20);
-  //   PRINT(Setpoint);
+  Setpoint = 100 + getPosition();
+  PID_task(&move, &getRotaryAngle, Setpoint);
+    PRINT(Setpoint);
 }
