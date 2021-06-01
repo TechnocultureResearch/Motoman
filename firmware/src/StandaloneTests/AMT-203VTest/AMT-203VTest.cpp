@@ -63,13 +63,13 @@ void loop()
    ABSposition = temp[0] << 8;    //shift MSB to correct ABSposition in ABSposition message
    ABSposition += temp[1];    // add LSB to ABSposition message to complete message
     
-   if (ABSposition != ABSposition_last)    //if nothing has changed dont wast time sending position
-   {
+//    if (ABSposition != ABSposition_last)    //if nothing has changed dont wast time sending position
+//    {
      ABSposition_last = ABSposition;    //set last position to current position
      deg = ABSposition;
      deg = deg * 0.08789;    // aprox 360/4096
      Serial.println(deg);     //send position in degrees
-   }   
+//    }   
  
    delay(10);    //wait a bit till next check
  

@@ -1,6 +1,8 @@
 #ifndef ENCODER_H___
 #define ENCODER_H___
 
+#include <Arduino.h>
+
 #define TICK_FACTOR 5
 
 int counter = 0;
