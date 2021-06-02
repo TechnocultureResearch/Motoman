@@ -2,7 +2,7 @@
 
 #include "board.h"
 
-const int LDR = ACS712_ANALOG_IN_PIN;
+const int LDR = CM3_ACS712_ANALOG_IN_PIN;
 int input_val = 0;
 
 void setup()

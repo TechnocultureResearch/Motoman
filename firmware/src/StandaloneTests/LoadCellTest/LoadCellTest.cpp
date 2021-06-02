@@ -1,9 +1,10 @@
 #include <Arduino.h>
+#include "board.h"
 
 #include <Q2HX711.h>
 
-const byte hx711_data_pin = 9;
-const byte hx711_clock_pin = 8;
+const byte hx711_data_pin = LOAD_CELL_DIGITAL_OUT_DT;
+const byte hx711_clock_pin = LOAD_CELL_DIGITAL_OUT_SCK;
 
 float y1 = 20.0; // calibrated mass to be added
 long x1 = 0L;
@@ -13,7 +14,7 @@ float avg_size = 10.0; // amount of averages for each mass measurement
 Q2HX711 hx711(hx711_data_pin, hx711_clock_pin); // prep hx711
 
 void setup() {
-  Serial.begin(115200); // prepare serial port
+  Serial.begin(SERIAL_1_BAUD_RATE); // prepare serial port
   delay(1000); // allow load cell and hx711 to settle
   // tare procedure
   for (int ii=0;ii<int(avg_size);ii++){

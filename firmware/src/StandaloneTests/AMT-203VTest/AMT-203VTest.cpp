@@ -1,8 +1,8 @@
 #include <Arduino.h>
-
+#include "board.h"
 #include <SPI.h>
  
-#define CS 2 //Chip or Slave select 
+#define CS AB_ENCODER_DIGITAL_OUT_CHIP_SELECT //Chip or Slave select 
  
 uint16_t ABSposition = 0;
 uint16_t ABSposition_last = 0;
@@ -18,7 +18,7 @@ void setup()
   SPI.setBitOrder(MSBFIRST);
   SPI.setDataMode(SPI_MODE0);
   SPI.setClockDivider(SPI_CLOCK_DIV32);
-  Serial.begin(115200);
+  Serial.begin(SERIAL_1_BAUD_RATE);
   Serial.println("starting");
   Serial.flush();
   delay(2000);

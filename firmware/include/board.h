@@ -50,13 +50,13 @@
   #define MPU6050_INT_PIN    /* Unused */
   
   // // Current Sensor 5(CM5) pinout
-  //   #define ACS712_ANALOG_IN_PIN A11
+  #define CM5_ACS712_ANALOG_IN_PIN A11
   
   // // Current Sensor 4(CM4) pinout
-  //   #define ACS712_ANALOG_IN_PIN A12
+  #define CM4_ACS712_ANALOG_IN_PIN A12
   
   // // Current Sensor 3(CM3) pinout
-  //   #define ACS712_ANALOG_IN_PIN A13
+  #define CM3_ACS712_ANALOG_IN_PIN A13
 #endif
 
 
